@@ -66,8 +66,7 @@ def test_hf_casual_fwd():
         attn.forward = patches[model_name]
         with torch.device('cuda'):
             model = AutoModelForCausalLM.from_config(config=config,
-                                                     torch_dtype=torch.bfloat16,
-                                                     attn_implementation='flash_attention_2')
+                                                     torch_dtype=torch.bfloat16,)
             model = model.to(device='cuda')
             sync_model_parameters_global(model)
 
@@ -144,8 +143,7 @@ def test_hf_casual_fwd_bwd():
         attn.forward = patches[model_name]
         with torch.device('cuda'):
             model = AutoModelForCausalLM.from_config(config=config,
-                                                     torch_dtype=torch.bfloat16,
-                                                     attn_implementation='flash_attention_2')
+                                                     torch_dtype=torch.bfloat16,)
             model = model.to(device='cuda')
             sync_model_parameters_global(model)
 

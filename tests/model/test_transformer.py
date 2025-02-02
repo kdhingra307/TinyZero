@@ -38,8 +38,7 @@ def test_hf_casual_models():
         # config = AutoConfig.from_pretrained(test_case)
         with torch.device('cuda'):
             model = AutoModelForCausalLM.from_config(config=config,
-                                                     torch_dtype=torch.bfloat16,
-                                                     attn_implementation='flash_attention_2')
+                                                     torch_dtype=torch.bfloat16)
             model = model.to(device='cuda')
         input_ids = torch.randint(low=0, high=config.vocab_size, size=(batch_size, seqlen), device='cuda')
         attention_mask = create_random_mask(input_ids=input_ids,
@@ -99,8 +98,7 @@ def test_hf_value_models():
         setattr(config, 'hidden_dropout', 0)
         with torch.device('cuda'):
             model = AutoModelForTokenClassification.from_config(config=config,
-                                                                torch_dtype=torch.bfloat16,
-                                                                attn_implementation='flash_attention_2')
+                                                                torch_dtype=torch.bfloat16)
             model = model.to(device='cuda')
         input_ids = torch.randint(low=0, high=config.vocab_size, size=(batch_size, seqlen), device='cuda')
         attention_mask = create_random_mask(input_ids=input_ids,
